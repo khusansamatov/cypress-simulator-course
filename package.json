@@ -1,0 +1,20 @@
+{
+  "name": "cypress-simulator-course-en",
+  "version": "1.0.0",
+  "description": "Project of Cypress Simulator course from the Talking About Testing online school.",
+  "main": "src/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Testing",
+    "Cypress.io",
+    "Talking About Testing",
+    "Cypress Simulator",
+    "GitHub Actions",
+    "TAT School"
+  ],
+  "author": "Walmyr <wlsf82@gmail.com> (https://walmyr.dev/)",
+  "license": "MIT",
+  "type": "commonjs"
+}
