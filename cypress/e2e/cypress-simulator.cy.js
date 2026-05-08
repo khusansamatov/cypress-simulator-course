@@ -1,3 +1,5 @@
+/// <reference types="Cypress" />
+
 describe("Cypress Simulator", () => {
 
   beforeEach(() => {
@@ -9,8 +11,16 @@ describe("Cypress Simulator", () => {
     cy.contains('button', 'Login').click()
   })
   
-  it("success", () => {
+  it("Simulate a Cypress comman (e.g., cy.log('Yay!'))", () => {
+    cy.get('textarea[placeholder="Write your Cypress code here..."]')
+    .type("cy.log('Yay!')")
 
+    cy.contains('button', 'Run').click()
+
+    cy.get('#outputArea', {timeout: 6000})
+    .should('contain', 'Success')
+    .and('contain', "cy.log('Yay!')")
+    .and('be.visible')
   })
 
   it("error: invalid command scenario", () => {
