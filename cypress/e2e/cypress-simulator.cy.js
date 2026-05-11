@@ -47,7 +47,7 @@ describe("Cypress Simulator", () => {
 
   })
 
-  it.only("error: valid command without parentheses", () => {
+  it("error: valid command without parentheses", () => {
     cy.get('textarea[placeholder="Write your Cypress code here..."]')
       .type('cy.visit')
     cy.contains('button', 'Run').click()
@@ -59,8 +59,20 @@ describe("Cypress Simulator", () => {
   })
 
   it("help", () => {
+    cy.get('textarea[placeholder="Write your Cypress code here..."]')
+      .type('help')
+    cy.contains('button', 'Run').click()
 
-  })
+    cy.get('#outputArea', { timeout: 6000})
+      .should('contain', 'Common Cypress commands and examples:')
+      .and('contain', 'For more commands and details, visit the official Cypress API documentation.')
+      .and('be.visible')
+    
+    cy.contains('#outputArea a', 'official Cypress API documentation')
+      .should('have.attr', 'href', 'https://docs.cypress.io/api/table-of-contents')
+      .and('have.attr', 'target', '_blank')
+      .and('be.visible')
+    })
 
   it("maximize/minimize", () => {
 
