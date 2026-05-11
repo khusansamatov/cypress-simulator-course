@@ -101,9 +101,14 @@ describe("Cypress Simulator", () => {
     cy.contains('button','Login').should('be.visible')
     cy.get('#sandwich-menu').should('not.be.visible')
   })
+  
+  it.only('show and hide logout button', () =>{
+    cy.get('#sandwich-menu').click()
+    cy.contains('button', 'Logout').should('be.visible')
 
-  it("show and hide logout button", () =>{
-
+    cy.get('#sandwich-menu').click()
+    cy.contains('button', 'Logout').should('not.be.visible')
+    
   })
 
   it("Running ... state", () => {
