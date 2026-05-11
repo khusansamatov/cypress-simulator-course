@@ -58,7 +58,7 @@ describe("Cypress Simulator", () => {
       .and('be.visible')
   })
 
-  it("help", () => {
+  it("asks for help and gets common Cypress commands and examples with a link to the docs", () => {
     cy.get('textarea[placeholder="Write your Cypress code here..."]')
       .type('help')
     cy.contains('button', 'Run').click()
@@ -71,6 +71,7 @@ describe("Cypress Simulator", () => {
     cy.contains('#outputArea a', 'official Cypress API documentation')
       .should('have.attr', 'href', 'https://docs.cypress.io/api/table-of-contents')
       .and('have.attr', 'target', '_blank')
+      .and('have.attr','rel', 'noopener noreferrer')
       .and('be.visible')
     })
 
