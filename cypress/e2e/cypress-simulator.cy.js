@@ -171,7 +171,7 @@ describe("Cypress Simulator", () => {
   })
 })
 
-describe.only('Cypress Simulator- Cookies Consent', () =>{
+describe('Cypress Simulator- Cookies Consent', () =>{
   beforeEach(() =>{
     cy.visit('./src/index.html?skipCaptcha=true')
     cy.contains('button', 'Login').click()
@@ -199,5 +199,24 @@ describe.only('Cypress Simulator- Cookies Consent', () =>{
     cy.window()
       .its('localStorage.cookieConsent')
       .should('be.equal', 'declined')
+  })
+})
+
+describe.only('Cypress Simulator - Captcha check', () =>{
+
+  beforeEach(() =>{
+    cy.visit('./src/index.html')
+    cy.contains('button', 'Login').click()
+  })
+
+  it('disables the captcha verify button when no answer is provided or it is cleared button check', () =>{
+    
+    cy.get('#verifyCaptcha').should('be.disabled')
+
+    cy.get('#captchaInput').type(42)
+    cy.get('#verifyCaptcha').should('be.enabled')
+
+    cy.get('#captchaInput').clear()
+    cy.get('#verifyCaptcha').should('be.disabled')
   })
 })
