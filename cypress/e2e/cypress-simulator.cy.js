@@ -219,4 +219,19 @@ describe.only('Cypress Simulator - Captcha check', () =>{
     cy.get('#captchaInput').clear()
     cy.get('#verifyCaptcha').should('be.disabled')
   })
+
+  it('shows an error on a wrong captcha answer and goes back to its initial state', () =>{
+
+    cy.contains('button', 'Verify').should('be.disabled')
+    
+    cy.get('input[placeholder="Enter your answer"]').type(42)
+    cy.contains('button', 'Verify').should('be.enabled')
+    cy.contains('button', 'Verify').click()
+
+    //cy.get('#captchaError').should('have.text', 'Incorrect answer, please try again.')
+    cy.contains('#captchaError', 'Incorrect answer, please try again.').should('be.visible')
+    cy.get('input[placeholder="Enter your answer"]').should('have.value', '')
+
+    cy.contains('button', 'Verify').should('be.disabled')
+  })
 })
