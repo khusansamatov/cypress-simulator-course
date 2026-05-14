@@ -150,8 +150,14 @@ describe("Cypress Simulator", () => {
 
   })
 
-  it("Run button - enabled/disabled states", () => {
+  it("checks the run button - enabled/disabled states", () => {
+    
+    cy.contains('button', 'Run').should('be.disabled')
+    cy.get('textarea[placeholder="Write your Cypress code here..."]').type('42')
+    cy.contains('button', 'Run').should('be.enabled')
 
+    cy.get('textarea[placeholder="Write your Cypress code here..."]').clear()
+    cy.contains('button', 'Run').should('be.disabled')
   })
 
   it("Reset textarea on logout and login", () =>{
@@ -202,7 +208,7 @@ describe('Cypress Simulator- Cookies Consent', () =>{
   })
 })
 
-describe.only('Cypress Simulator - Captcha check', () =>{
+describe('Cypress Simulator - Captcha check', () =>{
 
   beforeEach(() =>{
     cy.visit('./src/index.html')
