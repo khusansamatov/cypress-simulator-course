@@ -190,7 +190,24 @@ describe("Cypress Simulator", () => {
     cy.contains('button', 'Run').should('be.disabled')
   })
 
-  it("Reset output on logout and login", () =>{
+  it('clears the code output when logging off then logging in again', () =>{
+    cy.get('textarea[placeholder="Write your Cypress code here..."]')
+      .type('cy.log("Yay!")')
+    cy.contains('button', 'Run').click()
+
+    cy.get('#outputArea', {timeout: 6000}).should('contain', 'Success:')
+      .and('contain', 'cy.log("Yay!") // Logged message "Yay!"')
+      .and('be.visible')
+
+
+    cy.get('#sandwich-menu').click()
+    cy.contains('button', 'Logout').click()
+    
+    //cy.visit('./src/index.html?skipCaptcha=true')
+    cy.contains('button', 'Login').click()
+
+    cy.get('#outputArea').should('not.contain', 'Success:')
+      .and('not.contain', 'cy.log("Yay!") // Logged message "Yay!"')
 
   })
 
