@@ -160,8 +160,21 @@ describe("Cypress Simulator", () => {
     cy.contains('button', 'Run').should('be.disabled')
   })
 
-  it("Reset textarea on logout and login", () =>{
 
+  it.only('clears the code input when logging off then logging in again', () =>{
+    cy.get('textarea[placeholder="Write your Cypress code here..."]')
+      .type('cy.log("Yay!")')
+
+    cy.get('#sandwich-menu').click()
+    cy.contains('button', 'Logout').click()
+    
+    //cy.visit('./src/index.html?skipCaptcha=true')
+    cy.contains('button', 'Login').click()
+
+    cy.get('textarea[placeholder="Write your Cypress code here..."]')
+      .should('not.contain', 'cy.log("Yay!")')
+    cy.get('textarea[placeholder="Write your Cypress code here..."]')
+      .should('have.value', '')
   })
 
   it("Disable run button on logout and login", () => {
