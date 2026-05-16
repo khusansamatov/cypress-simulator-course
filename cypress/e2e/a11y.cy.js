@@ -73,6 +73,8 @@ describe('Cypress Simulator - A11y Checks', () => {
       .and('be.visible')
     cy.get('#collapseIcon').should('be.visible')
 
+    cy.checkA11y()
+
     cy.get('.expand-collapse').click()
 
     cy.get('#expandIcon').should('be.visible')
@@ -85,11 +87,15 @@ describe('Cypress Simulator - A11y Checks', () => {
 
     cy.contains('button','Login').should('be.visible')
     cy.get('#sandwich-menu').should('not.be.visible')
+
+    cy.checkA11y()
   })
 
   it('show and hide logout button', () =>{
     cy.get('#sandwich-menu').click()
     cy.contains('button', 'Logout').should('be.visible')
+
+    cy.checkA11y()
 
     cy.get('#sandwich-menu').click()
     cy.contains('button', 'Logout').should('not.be.visible')
@@ -107,6 +113,8 @@ describe('Cypress Simulator - A11y Checks', () => {
     cy.contains('#outputArea', 'Running... Please wait.')
     .should('be.visible')
 
+    cy.checkA11y()
+
     cy.contains('button', 'Running...', {timeout: 6000})
       .should('not.exist')
     cy.contains('button', 'Run').should('be.visible')
@@ -117,6 +125,8 @@ describe('Cypress Simulator - A11y Checks', () => {
       .should('contain', 'Success:')
       .and('contain', 'cy.log("Yay!") // Logged message "Yay!"')
       .and('be.visible')
+
+    cy.checkA11y()
   })
 })
 describe('Cypress Simulator- Cookies Consent', () =>{
@@ -129,6 +139,11 @@ describe('Cypress Simulator- Cookies Consent', () =>{
   it('consents on the cookies usage', () =>{
     cy.get('#cookieConsent')
       .as('cookieConsentBanner')
+      .should('be.visible')
+
+      cy.checkA11y()
+
+      cy.get('@cookieConsentBanner')
       .find('button:contains("Accept")')
       .click()
 
