@@ -211,8 +211,12 @@ describe("Cypress Simulator", () => {
 
   })
 
-  it("No cookings banner on the login page", () =>{
-    
+  it('does not show the cookie consent banner on the login page', () => {
+    cy.clearAllLocalStorage()
+
+    cy.reload()
+
+    cy.get('#cookieConsent').should('not.be.visible')
   })
 })
 
