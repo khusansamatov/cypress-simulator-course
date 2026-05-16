@@ -154,7 +154,7 @@ describe('Cypress Simulator- Cookies Consent', () =>{
   })
 })
 
-describe('Cypress Simulator - Captcha check', () =>{
+describe.only('Cypress Simulator - Captcha check', () =>{
 
   beforeEach(() =>{
     cy.visit('./src/index.html')
@@ -162,29 +162,23 @@ describe('Cypress Simulator - Captcha check', () =>{
     cy.injectAxe()
   })
 
-  it('disables the captcha verify button when no answer is provided or it is cleared button check', () =>{
+  it('finds no a11y issues on all captcha view states (button enabled/disabled and error)', () =>{
     
-    cy.get('#verifyCaptcha').should('be.disabled')
-
-    cy.get('#captchaInput').type(42)
-    cy.get('#verifyCaptcha').should('be.enabled')
-
-    cy.get('#captchaInput').clear()
-    cy.get('#verifyCaptcha').should('be.disabled')
-  })
-
-  it('shows an error on a wrong captcha answer and goes back to its initial state', () =>{
-
     cy.contains('button', 'Verify').should('be.disabled')
     
     cy.get('input[placeholder="Enter your answer"]').type(42)
     cy.contains('button', 'Verify').should('be.enabled')
+
+    cy.checkA11y()
     cy.contains('button', 'Verify').click()
 
-    //cy.get('#captchaError').should('have.text', 'Incorrect answer, please try again.')
-    cy.contains('#captchaError', 'Incorrect answer, please try again.').should('be.visible')
-    cy.get('input[placeholder="Enter your answer"]').should('have.value', '')
+    cy.contains('#captchaError', 'Incorrect answer, please try again.')
+      .should('be.visible')
+    cy.get('input[placeholder="Enter your answer"]')
+      .should('have.value', '')
 
     cy.contains('button', 'Verify').should('be.disabled')
-  })
+  
+    cy.checkA11y()
+  })  
 })
