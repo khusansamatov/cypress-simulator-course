@@ -19,6 +19,8 @@ describe('Cypress Simulator - A11y Checks', () => {
     .should('contain', 'Success')
     .and('contain', "cy.log('Yay!')")
     .and('be.visible')
+
+    cy.checkA11y('.success')
   })
 
   it("error: invalid command scenario", () => {
@@ -31,6 +33,8 @@ describe('Cypress Simulator - A11y Checks', () => {
     .should('contain', 'Error:')
     .and('contain', 'Invalid Cypress command: cy.run()')
     .and('be.visible')
+
+    cy.checkA11y('.error')
   })
 
   it("it shows a warning when entering and running a not-implemented Cypress commmand (e.g., cy.contains('Login'))", ()=> {
@@ -42,6 +46,8 @@ describe('Cypress Simulator - A11y Checks', () => {
       .should('contain', 'Warning:')
       .and('contain', 'The `cy.contains` command has not been implemented yet.')
       .and('be.visible')
+
+      cy.checkA11y('.warning')
   })
   it("asks for help and gets common Cypress commands and examples with a link to the docs", () => {
     cy.get('textarea[placeholder="Write your Cypress code here..."]')
@@ -58,6 +64,8 @@ describe('Cypress Simulator - A11y Checks', () => {
       .and('have.attr', 'target', '_blank')
       .and('have.attr','rel', 'noopener noreferrer')
       .and('be.visible')
+
+    cy.checkA11y('#outputArea')
     })
 
   it('maximizes and minimizes a simulation result', () =>{
@@ -154,7 +162,7 @@ describe('Cypress Simulator- Cookies Consent', () =>{
   })
 })
 
-describe.only('Cypress Simulator - Captcha check', () =>{
+describe('Cypress Simulator - Captcha check', () =>{
 
   beforeEach(() =>{
     cy.visit('./src/index.html')
