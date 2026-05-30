@@ -12,9 +12,10 @@ describe("Cypress Simulator", () => {
   })
 
   it("error: valid command without parentheses", () => {
-    cy.get('textarea[placeholder="Write your Cypress code here..."]')
-      .type('cy.visit')
-    cy.contains('button', 'Run').click()
+    // cy.get('textarea[placeholder="Write your Cypress code here..."]')
+    //   .type('cy.visit')
+    // cy.contains('button', 'Run').click()
+    cy.run('cy.visit')
 
     cy.get('#outputArea', {timeout: 6000 })
       .should('contain', 'Error:')
@@ -66,8 +67,10 @@ describe("Cypress Simulator", () => {
   })
 
   it('disables the run button  when logging off then logging in again', () => {
-    cy.get('textarea[placeholder="Write your Cypress code here..."]')
-      .type('cy.log("Yay!")')
+    // cy.get('textarea[placeholder="Write your Cypress code here..."]')
+    //   .type('cy.log("Yay!")')
+    // cy.contains('button', 'Run').click()
+    cy.run('cy.log("Yo!")')
 
     cy.get('#sandwich-menu').click()
     cy.contains('button', 'Logout').click()
@@ -79,12 +82,13 @@ describe("Cypress Simulator", () => {
   })
 
   it('clears the code output when logging off then logging in again', () =>{
-    cy.get('textarea[placeholder="Write your Cypress code here..."]')
-      .type('cy.log("Yay!")')
-    cy.contains('button', 'Run').click()
+    // cy.get('textarea[placeholder="Write your Cypress code here..."]')
+    //   .type('cy.log("Yay!")')
+    // cy.contains('button', 'Run').click()
+    cy.run('cy.log("Yo!")')
 
     cy.get('#outputArea', {timeout: 6000}).should('contain', 'Success:')
-      .and('contain', 'cy.log("Yay!") // Logged message "Yay!"')
+      .and('contain', 'cy.log("Yo!") // Logged message "Yo!"')
       .and('be.visible')
 
 

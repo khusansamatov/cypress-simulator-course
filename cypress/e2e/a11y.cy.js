@@ -10,24 +10,26 @@ describe('Cypress Simulator - A11y Checks', () => {
     })
 
     it("Simulate a Cypress comman (e.g., cy.log('Yay!'))", () => {
-    cy.get('textarea[placeholder="Write your Cypress code here..."]')
-    .type("cy.log('Yay!')")
+    // cy.get('textarea[placeholder="Write your Cypress code here..."]')
+    // .type("cy.log('Yay!')")
 
-    cy.contains('button', 'Run').click()
+    // cy.contains('button', 'Run').click()
+    cy.run('cy.log("Yay!")')
 
     cy.get('#outputArea', {timeout: 6000})
     .should('contain', 'Success')
-    .and('contain', "cy.log('Yay!')")
+    .and('contain', 'cy.log("Yay!")')
     .and('be.visible')
 
     cy.checkA11y('.success')
   })
 
   it("error: invalid command scenario", () => {
-    cy.get('textarea[placeholder="Write your Cypress code here..."]')
-    .type('cy.run()')
+    // cy.get('textarea[placeholder="Write your Cypress code here..."]')
+    // .type('cy.run()')
 
-    cy.contains('button', 'Run').click()
+    // cy.contains('button', 'Run').click()
+    cy.run('cy.run()')
 
     cy.get('#outputArea', {timeout: 6000})
     .should('contain', 'Error:')
@@ -38,9 +40,10 @@ describe('Cypress Simulator - A11y Checks', () => {
   })
 
   it("it shows a warning when entering and running a not-implemented Cypress commmand (e.g., cy.contains('Login'))", ()=> {
-    cy.get('textarea[placeholder="Write your Cypress code here..."]')
-      .type("cy.contains('Login')")
-    cy.contains('button', 'Run').click()
+    // cy.get('textarea[placeholder="Write your Cypress code here..."]')
+    //   .type("cy.contains('Login')")
+    // cy.contains('button', 'Run').click()
+    cy.run('cy.contains("Login")')
 
     cy.get('#outputArea', {timeout: 6000})
       .should('contain', 'Warning:')
@@ -50,9 +53,10 @@ describe('Cypress Simulator - A11y Checks', () => {
       cy.checkA11y('.warning')
   })
   it("asks for help and gets common Cypress commands and examples with a link to the docs", () => {
-    cy.get('textarea[placeholder="Write your Cypress code here..."]')
-      .type('help')
-    cy.contains('button', 'Run').click()
+    // cy.get('textarea[placeholder="Write your Cypress code here..."]')
+    //   .type('help')
+    // cy.contains('button', 'Run').click()
+    cy.run('help')
 
     cy.get('#outputArea', { timeout: 6000})
       .should('contain', 'Common Cypress commands and examples:')
@@ -69,15 +73,16 @@ describe('Cypress Simulator - A11y Checks', () => {
     })
 
   it('maximizes and minimizes a simulation result', () =>{
-    cy.get('textarea[placeholder="Write your Cypress code here..."]')
-      .type('cy.log("Yay")')
-    cy.contains('button', 'Run').click()
+    // cy.get('textarea[placeholder="Write your Cypress code here..."]')
+    //   .type('cy.log("Yay")')
+    // cy.contains('button', 'Run').click()
+    cy.run('cy.log("Yay!")')
 
     cy.get('.expand-collapse').click()
 
     cy.get('#outputArea', {timeout: 6000 })
       .should('contain', 'Success')
-      .and('contain', 'cy.log("Yay") // Logged message "Yay"')
+      .and('contain', 'cy.log("Yay!") // Logged message "Yay!"')
       .and('be.visible')
     cy.get('#collapseIcon').should('be.visible')
 
@@ -111,9 +116,10 @@ describe('Cypress Simulator - A11y Checks', () => {
   })
 
   it('shows the running state before showing the final result', () =>{
-    cy.get('textarea[placeholder="Write your Cypress code here..."]')
-      .type('cy.log("Yay!")')
-    cy.contains('button', 'Run').click()
+    // cy.get('textarea[placeholder="Write your Cypress code here..."]')
+    //   .type('cy.log("Yay!")')
+    // cy.contains('button', 'Run').click()
+    cy.run('cy.log("Yay!")')
 
     cy.contains('button', 'Running...')
       .should('be.disabled')
