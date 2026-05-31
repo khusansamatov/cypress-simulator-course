@@ -3,8 +3,15 @@ on: push
 jobs:
     cypress-run:
         runs-on: ubuntu-22.04
+        strategy:
+            fail-fast: false
+            matrix:
+                containers: [1, 2]
         steps:
             - name: Checkout
               uses: actions/checkout@v6
-            - name: Cypress run
+            - name: Run Cypress tests in parallel
               uses: cypress-io/github-action@v7
+              env:
+                SPLIT: ${{ strategy.job-total }}
+                SPLIT_INDEX: ${{ strategy.job-index }}
