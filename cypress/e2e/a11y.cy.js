@@ -27,7 +27,6 @@ describe('Cypress Simulator - A11y Checks', () => {
         cy.checkA11y('.success')
       })
     })
-  })
 
   it("error: invalid command scenario", () => {
     // cy.get('textarea[placeholder="Write your Cypress code here..."]')
