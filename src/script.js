@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const urlParams = new URLSearchParams(window.location.search)
   const chancesOfError = urlParams.get("chancesOfError")
-  const skipCaptcha = urlParams.get("skipCaptcha") === "false"
+  const skipCaptcha = urlParams.get("skipCaptcha") === "true"
 
   const checkExistingSession = () => {
     const sessionData = localStorage.getItem("cypressSimulatorSession")
