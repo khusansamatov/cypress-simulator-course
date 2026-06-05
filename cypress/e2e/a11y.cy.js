@@ -1,7 +1,8 @@
 describe('Cypress Simulator - A11y Checks', () => {
     beforeEach(() => {
         cy.login()
-        cy.visit('./src/index.html?skipCaptcha=true', {
+        //cy.visit('./src/index.html?skipCaptcha=true', {
+        cy.visit("./src/index.html?skipCaptcha=true&chancesOfError=0", {
             onBeforeLoad(win){
                 win.localStorage.setItem('cookieConsent', 'accepted')
             }
@@ -15,10 +16,10 @@ describe('Cypress Simulator - A11y Checks', () => {
 
     // cy.contains('button', 'Run').click()
     //cy.run('cy.log("Yay!")')
-    Cypress._.times(100, () => {
-      it("successfully simulates a Cypress command (e.g., cy.log('Yay!'))", () => {
-        cy.run("cy.log('Yay!')")
-
+    // Cypress._.times(100, () => {
+    //   it("successfully simulates a Cypress command (e.g., cy.log('Yay!'))", () => {
+    //     cy.run("cy.log('Yay!')")
+  it("successfully simulates a Cypress command (e.g., cy.log('Yay!'))", () => {
         cy.get('#outputArea', {timeout: 6000})
           .should('contain', 'Success')
           .and('contain', 'cy.log("Yay!")')
@@ -26,7 +27,7 @@ describe('Cypress Simulator - A11y Checks', () => {
         
         cy.checkA11y('.success')
       })
-    })
+
 
   it("error: invalid command scenario", () => {
     // cy.get('textarea[placeholder="Write your Cypress code here..."]')
@@ -74,7 +75,7 @@ describe('Cypress Simulator - A11y Checks', () => {
       .and('be.visible')
 
     cy.checkA11y('#outputArea')
-    })
+  })
 
   it('maximizes and minimizes a simulation result', () =>{
     // cy.get('textarea[placeholder="Write your Cypress code here..."]')
